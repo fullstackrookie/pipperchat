@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PipperChat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b06e392afc9015eb7858b5fc7ed763dadf46ecd")]
 [assembly: System.Reflection.AssemblyProductAttribute("PipperChat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PipperChat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
