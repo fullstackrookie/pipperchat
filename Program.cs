@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
 using PipperChat.Data;
 
@@ -8,11 +9,14 @@ builder.WebHost.UseUrls("http://127.0.0.1:5000");
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<PipperChatContext>(options    =>  options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddControllers();
 
 // Add logging to the application
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
+
+
 
 var app = builder.Build();
 

@@ -49,6 +49,7 @@ namespace   PipperChat.Data
         public  DateTime    CreateAt    {   get;    set;}
 
         public  DateTime?   LastSeen    {   get;    set;}
+        public  DateTime    DateofBirth {   get;    set;}
 
         // Navigation properties
         public  virtual ICollection<Message>    SentMessages    {   get;    set;}
@@ -65,7 +66,7 @@ namespace   PipperChat.Data
     public  class   Message
     {
         public  int Id  {   get;    set;}
-        public  string  Content {   get;    set;}
+        public  string  Content {   get;    set;}   =   string.Empty;
         public  DateTime    Timestamp   {   get;    set;}
         public  bool    IsEdited    {   get;    set;}
         public  DateTime?   EditedAt    {   get;    set;}
@@ -76,7 +77,7 @@ namespace   PipperChat.Data
         public  int RecipientId {   get;    set;}
 
         //  Navigation properties
-        public  virtual User    Sender  {   get;    set;}  
+        public  virtual User    Sender  {   get;    set;}  =    null!;
         public  virtual Group?  Group   {   get;    set;}
         public  virtual User?   Recipient   {   get;    set;}
 
@@ -116,8 +117,8 @@ namespace   PipperChat.Data
         public  DateTime    JoinedAt    {   get;    set;}
 
         // Navigation   properties
-        public  virtual Group   Group   {   get;    set;}
-        public  virtual User    User    {   get;    set;}
+        public  virtual Group   Group   {   get;    set;}   =   null!;
+        public  virtual User    User    {   get;    set;}   =   null!;
 
         public  GroupMember()
         {

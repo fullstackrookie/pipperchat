@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Kb7ybDOLHrFNJ+c3TFmiWSe4vG0W5TwOkrUxpwxH8JlHOYF2t7W3MGlo99If9UvY4+iXhUKIMZ4t0EthEcmOlw==",
+  "dgSpecHash": "J2ByXr3sZnlIMHzrfvmrdVFAS/t46iwcgM5G5g0eZASCOUGvp36+dmMbwcvj1wEC/8yWPbre55xm+QOugZJkZQ==",
   "success": true,
   "projectFilePath": "/home/ackerman/VScode/PipperChat/PipperChat.csproj",
   "expectedPackageFiles": [
+    "/home/ackerman/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/home/ackerman/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/ackerman/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "/home/ackerman/.nuget/packages/microsoft.build.framework/17.8.3/microsoft.build.framework.17.8.3.nupkg.sha512",
