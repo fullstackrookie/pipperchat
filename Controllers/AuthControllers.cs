@@ -98,7 +98,7 @@ namespace PiperChat.Controllers
                 {
                     Email = userDto.Email,
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword(userDto.Password),
-                    CreatedAt = DateTime.UtcNow
+                    CreateAt = DateTime.UtcNow
                 };
 
                 // Add user to database
