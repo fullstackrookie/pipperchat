@@ -133,3 +133,6 @@
 /home/ackerman/VScode/PipperChat/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /home/ackerman/VScode/PipperChat/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
 /home/ackerman/VScode/PipperChat/obj/Debug/net8.0/PipperChat.sourcelink.json
+/home/ackerman/VScode/PipperChat/bin/Debug/net8.0/launchSettings.json
+/home/ackerman/VScode/PipperChat/bin/Debug/net8.0/BCrypt.Net-Next.dll
+/home/ackerman/VScode/PipperChat/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.Google.dll

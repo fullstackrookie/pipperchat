@@ -1,5 +1,9 @@
+using PipperChat.Models;
+using System.ComponentModel.DataAnnotations;
+using PipperChat.Data;
+  
   namespace PipperChat.Models{
-  public  class   Message
+   public  class   Message
     {
         public  int Id  {   get;    set;}
         public  string  Content {   get;    set;}   =   string.Empty;

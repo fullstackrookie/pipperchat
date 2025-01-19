@@ -1,3 +1,7 @@
+using PipperChat.Models;
+using System.ComponentModel.DataAnnotations;
+using PipperChat.Data;
+
 namespace   PipperChat.Models
 {
  public  class   Group
@@ -5,7 +9,7 @@ namespace   PipperChat.Models
         public  int Id  {   get;    set;}
         public  string  Name    {   get;    set;}   =   string.Empty;
         public  string? Description {   get;    set;}
-        public  DateTime    CreateAt    {   get;    set;}
+        public  DateTime    CreatedAt    {   get;    set;}
         public  bool    IsPrivate   {   get;    set;}
 
         // Navigate properties
@@ -14,7 +18,7 @@ namespace   PipperChat.Models
 
         public  Group()
         {
-            CreateAt    =   DateTime.Now;
+            CreatedAt    =   DateTime.Now;
             Members =   new HashSet<GroupMember>();
             Messages    =   new HashSet<Message>();
         }
