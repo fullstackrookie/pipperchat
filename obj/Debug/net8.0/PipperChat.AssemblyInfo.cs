@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("0b5920c0-a3c9-4c09-a0aa-ca1ab78a4ebb")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("PipperChat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b91b6db332a558ee09655b4551ae6be9df9a42e5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b9d67d1c8dd84d19bb5af1216539205c803afee0")]
 [assembly: System.Reflection.AssemblyProductAttribute("PipperChat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PipperChat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

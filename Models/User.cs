@@ -13,7 +13,8 @@ namespace PipperChat.Models
         public string Email { get; set; } = string.Empty;
         
         public string? PasswordHash { get; set; }
-        
+        public  string? PasswordSalt    {   get;    set;}
+    
         public string? ProfilePicture { get; set; }
         
         public DateTime CreatedAt { get; set; }
@@ -21,6 +22,10 @@ namespace PipperChat.Models
         public DateTime? LastSeen { get; set; }
         
         public DateTime DateOfBirth { get; set; }
+
+        public  string  RefreshToken    {   get;    set;}   =   string.Empty;
+        public  DateTime  RefreshTokenExpiryTime  {   get;    set;}  
+
         
         //GoogleId property
         public string? GoogleId { get; set; }
