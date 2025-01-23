@@ -1,0 +1,22 @@
+@model LoginViewModels
+
+<div    class="H-Screen">
+    <div    class="Left">
+        <h1 class="Text">
+            Miss your friends? Say hi.
+        </h1>
+        <img    src="/" />
+    </div>
+    <div    class="SignIn-TXT">
+        <h2 class="SignIn">SignIn</h2>
+        <form   class="Form"    onsubmit="{handleLogin}">
+            <div>
+                <label  class="email"   for="email">Email</label>
+                <input type="email" class="email"   placeholder="Enter Email"   onchange={(e)   =>  setEmail(e.target.value)}/>
+            </div>
+            <div class="Password">
+                <label  >Password</label>
+            </div>
+        </form>
+    </div>
+</div>

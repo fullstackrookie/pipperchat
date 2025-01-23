@@ -1,0 +1,161 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using PipperChat.Models;
+
+
+namespace   PipperChat.Controllers
+{
+
+
+    public  class   LoginController :   Controller
+    {
+        private readonly    SignInManager<ApplicationUser>  _signInManger;
+        private readonly    UserManager<ApplicationUser>    _userManager;
+
+        public  LoginController(
+            SignInManager<ApplicationUser>  signInManager,
+            UserManager<ApplicationUser>    userManager)
+        {
+            _signInManger   =   signInManager;
+            _userManager    =   userManager;
+        }
+
+         //  Get Login
+        [HttpGet]
+        [AllowAnonymous]
+        public  IActionResult   Index(string    returnUrl   =   null)
+        {   
+            //  Clearing    the     external    cookie
+            HttpContext.SignOutAysnc(IdentityConstants.ExternalScheme);
+
+            ViewData["ReturnUrl"]   =   returnUrl;
+            return  View();
+        }
+
+        //  Post    Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public  async   Task<IActionResult> Login(LoginViewModel    model,  string  returnUrl   =   null)
+        {
+            ViewData["ReturnUrl"]   =   returnUrl;
+
+            if  (ModelState.IsValid)
+            {
+                //  Attempt to  sign    in  user
+                var result  =   await   _signInManger.PasswordSignInAsync(
+                model.Email,
+                model.Password,
+                model.RemeberMe,
+                lockoutOnFailure:   true);
+
+            if  (result.Succeeded)
+            {
+                //  Redirect    to  the     Home    Page
+                return  LocalRedirect(returnUrl ??  returnUrl.Content("~/"));
+            }
+
+            if  (result.RequiresTwoFactor)
+            {
+                //  Redirects   to  two-factor  authentication
+                return  RedirectToPage("./LoginWith2fa",    new {   ReturnUrl   =   returnUrl,  RememberMe  =   model.RemeberMe });
+            }
+
+            if  (result.IsLockedOut)
+            {
+                //  Handle  locked  out user
+                return  RedirectToPage("./Lockout");
+            }
+
+            //  Something   Failed 
+            ModelState.AddModelError(string.Empty,  "Invalid    login   attempt.");
+            return  View("Index",   model);
+            
+            }       
+
+            //  If  we  got this    far,    something   failed
+            return  View("Index",   model);
+        }
+    
+        //  External    Login
+        [Httpost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public  IActionResult   ExternalLogin(string    provider,   string  returnUrl   =   null)
+        {
+            //  Configure   the redirect    URL
+             var redirect    =   Url.Action(nameof(ExternalLoginCallback),   "Login",    new {   ReturnUrl   =   returnUrl});
+
+            //  Create  Properties  for authentication
+            var properties  =   _signInManger.ConfigureExternalAuthenticationProperties(provider,   redirectUrl);
+
+            //  Challenge   the     external    authentication  provider
+            return  Challenge(properties,   provider);
+        }
+
+        //  External    Login   Callback
+        [HttpGet]
+        [AllowAnonymous]
+        public  async   Task<IActionResult> ExternalLoginCallback(string    returnUrl   =   null,   string  remoteError =   null)
+        {
+            returnUrl   =   returnUrl   ??  Url.Content("~/");
+
+            if  (   remoteError !=  null)
+            {
+                ModelState.AddModelError(string.Empty,  $"Error from    external    provider:   {remoteError}");
+                return  View("Index");
+            }
+
+            //  Get the external    login   information
+            var info    =   await   _signInManger.GetExternalLoginInfoAysnc();
+            if  (info   ==  null)
+            {
+                return  RedirectToPage("./Login");
+            }
+
+            //  Sign in user with external login
+            var result  =   await   _signInManger.ExternalLoginSignInAsync(
+                info.LoginProvider,
+                info.ProviderKey,
+
+                isPersistent:   false);
+
+            if  (result.Succeeded)
+            {
+                return  LocalRedirect(returnUrl);
+            }
+
+             //  If the user does not have an account
+
+            var email   =   info.Principal.FindFirstValue(ClaimTypes.Email);
+
+            var user    =   new ApplicationUser {   UserName    =   email,  Email   =   email};
+
+            var createResult    =   await   _userManager.CreateAysnc(user);
+
+            if  (createResult.Succeeded)
+            {
+                //  Add the external    login   to  user
+                await   _userManager.AddLoginAsync(user,    info);
+                await   _signInManger.SignInAsync(user, isPersistent:   false);
+                return  LocalRedirect(returnUrl);
+            }
+
+            //  If  creation fails
+            ModelState.AddModelError(string.Empty,  "Error  creating    external    login   account.");
+            return  View("Index");
+        }
+
+        //  Logout
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public  async   Task<IActionResult> Logout  ()
+        {
+            await   _signInManger.SignOutAysnc();
+            return  RedirectToAction("Index",   "Home");
+        }
+    }
+}
